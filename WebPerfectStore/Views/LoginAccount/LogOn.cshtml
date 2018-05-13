@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "LogOn";
+}
+<div id="errorpanel">
+     @Html.ValidationSummary()
+</div>
+
+<div class="modal-dialog">
+    @using (Html.BeginForm())
+    { 
+    <table>
+        <tr>
+            <td>Email:</td>
+            <td>
+                @Html.TextBox("username", null, new { @class = "userbox"})
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                @Html.Password("password", null, new { @class = "password"})
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="image" src="/Content/images/buttonLogin.gif"
+                       alt="Login" width="80" height="20" border="0" id="Image1"
+                       name="Image1">
+            </td>
+            <td align="right" valign="bottom"></td>
+        </tr>
+    </table>
+     } 
+</div>
+
+<h2>LogOn</h2>
+

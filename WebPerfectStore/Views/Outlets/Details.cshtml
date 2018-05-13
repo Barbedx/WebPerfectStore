@@ -1,0 +1,114 @@
+﻿@model WebPerfectStore.Models.Outlet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Точки</h4>
+    <hr />
+    <div class="row">
+
+        <table class="table"> 
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.fName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.fAddress)
+                </th>
+
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.POP)
+                </th>
+
+
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreArea)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Tier)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Traffic)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.fcomment)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Coordinates)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.fName)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(model => model.fAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.POP)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.StoreArea)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Tier)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Traffic)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.fcomment)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Coordinates)
+                </td>
+
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="table">
+        <table class="table">
+
+
+        @foreach (var attribute in Model.OutletAttributes.OrderBy(x => x.exid))
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(model => attribute.AttrName)
+                </th>
+
+                <td class="form-md-10">
+                    @Html.DisplayFor(model => attribute.AttrText)
+                </td>
+            </tr>
+
+        }
+        </table>
+    </div>
+</div>
+<p class="panel-footer">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.fID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

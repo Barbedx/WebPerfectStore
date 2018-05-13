@@ -1,0 +1,156 @@
+﻿@model WebPerfectStore.ViewModels.OrderViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Редактирование</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Model.Order.DocType.DocTypeName</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Order.MasterAgent, "MasterAgent", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MasterFID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Order.MasterFID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Order.Outlet, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ActionLink(
+                Model.Order.Outlet.fName,
+                "Details", "Outlets", new { id = Model.Order.Outlet.fID }, htmlAttributes: new { @class = "btn btn-link" })
+            </div>
+        </div>
+ 
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Order.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Order.OrderDate)
+                @Html.ValidationMessageFor(model => model.Order.OrderDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Order.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Order.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.Comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Order.Activity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Order.Activity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.Condition, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Order.Sum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Order.Sum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.Sum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Order.DocType, "DocType", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DocTypeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Order.DocTypeID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.MasterDocID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MasterDocID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MasterDocID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MasterDocMasterfID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MasterDocMasterfID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MasterDocMasterfID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            @Html.HiddenFor(h => h.Order.DocTypeID)
+            @Html.HiddenFor(h => h.Order.MasterFID)
+            @Html.HiddenFor(h => h.Order.OutletID)
+            @Html.HiddenFor(h => h.Order.ID)
+
+        </div>
+        <table class="table form-group">
+            <thead>
+
+                <tr>
+                    <th>Вопрос</th>
+                    @foreach (var item in Model.Questions.SelectMany(x => x.Answers).GroupBy(x => x.Attribute).Select(k => k.Key).OrderBy(o => o.AttrID))
+                {
+
+                        <th> @Html.DisplayFor(m => item.AttrName) </th>
+                    }
+                </tr>
+            </thead>
+
+            @for (var i = 0; i < Model.Questions.Count; i++)
+            {
+                <tr>
+                    <td> @Html.DisplayFor(item => item.Questions[i].Item.ShortName)</td>
+                    @Html.HiddenFor(h => h.Questions[i].Item.ID)
+
+                    @for (var j = 0; j < Model.Questions[i].Answers.Count; j++)
+                    {
+
+                        <td>
+                            @Html.HiddenFor(h => h.Questions[i].Answers[j].Attribute.AttrID)
+                        @Html.EditorFor(e => e.Questions[i].Answers[j].Value, new { htmlAttributes = new Dictionary<string, object>() { { "class", "form-control" }, { "type", "number" } } })
+                    </td>
+                    }
+                </tr>
+            }
+        </table>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,78 @@
+﻿@model WebPerfectStore.Models.Order
+
+@{
+    string action = Model.Activity ? "Удалить":"Востановить";
+    ViewBag.Title = action;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Вы уверены что хотите @action.ToLower() этот документ?</h3>
+<div>
+    <h4>Документ</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DocType.DocTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocType.DocTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Outlet.fName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Outlet.fName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Outlet.fAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Outlet.fAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sum)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @*<input type="submit" value="Delete" class="btn btn-default">*@
+            <button type="submit" > <span class="glyphicon glyphicon-remove-circle"/><span>@action</span> </button>
+                @*<span class="glyphicon glyphicon-remove-circle"></span>*@
+    |
+            @Html.ActionLink("Назад к списку", "Index")
+        </div>
+    }
+</div>

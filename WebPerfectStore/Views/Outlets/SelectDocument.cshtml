@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WebPerfectStore.Models.DocType>
+
+<div class="modal-body">
+
+    <p>
+        <h2>Выберите документ:</h2>
+    </p>
+
+    <div class="btn btn-group-vertical col-sm-12">
+        @foreach (var item in Model)
+        {
+
+            @*<div class="col-xs-12 col-md-12 col-lg-12">*@
+                @Html.ActionLink(item.DocTypeName, "Create", "Orders", new { outletID = ViewBag.OutletID, dtid = item.DocTypeID }, new { @class = "btn btn-default" })
+            @*</div>*@
+
+
+        }
+    </div>
+</div>

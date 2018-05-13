@@ -1,0 +1,134 @@
+﻿@model IEnumerable<WebPerfectStore.Models.Order>
+
+@{
+    ViewBag.Title = "Документы";
+}
+
+<h2>Документы</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<div class="container">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th class="visible-lg">
+                    @Html.DisplayNameFor(model => model.MasterAgent.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Number)
+                    <div class="visible-xs"> @Html.DisplayNameFor(model => model.OrderDate)</div>
+                    <div class="visible-xs"> @Html.DisplayNameFor(model => model.Outlet.fName)</div>
+                    <div class="visible-xs"> @Html.DisplayNameFor(model => model.Outlet.fAddress)</div>
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.Outlet.fName)
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.Outlet.fAddress)
+                </th>
+
+
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.DocType.DocTypeName)
+                    <div class="text-success visible-xs">@Html.DisplayNameFor(model => model.Sum)</div>
+                    <div class="visible-xs">
+                        @Html.DisplayNameFor(model => model.Comment)
+                    </div>
+                </th>
+
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.Sum)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Activity)
+                    </th>*@
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.Comment)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @*@{string active = "";}*@
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+
+                <tr class="panel-collapse @(item.Activity ? "" : "danger")" data-toggle="collapse" data-target="#@string.Concat(item.ID,item.MasterFID)">
+
+                    <td class="visible-lg">
+                        @Html.DisplayFor(modelItem => item.MasterAgent.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                        <div class="visible-xs"> @Html.DisplayFor(modelItem => item.OrderDate)</div>
+                        <div class="visible-xs"> @Html.DisplayFor(modelItem => item.Outlet.fName)</div>
+                        <div class="visible-xs"> @Html.DisplayFor(modelItem => item.Outlet.fAddress)</div>
+                    </td>
+
+                    <td class="hidden-xs">
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td class="hidden-xs">
+                        @Html.DisplayFor(modelItem => item.Outlet.fName)
+                    </td>
+                    <td class="hidden-xs">
+                        @Html.DisplayFor(modelItem => item.Outlet.fAddress)
+                    </td>
+
+                    <td class=" text-right">
+                        @Html.DisplayFor(modelItem => item.DocType.DocTypeName)
+                        <div class="text-success visible-xs">@Html.DisplayFor(modelItem => item.Sum)</div>
+                        <div class="visible-xs">@Html.DisplayFor(modelItem => item.Comment)</div>
+                    </td>
+                    <td class="hidden-xs">
+                        @Html.DisplayFor(modelItem => item.Sum)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Condition)
+                        </td>*@
+                    <td class="hidden-xs">
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td class="hidden-xs">
+
+                        @Html.ActionLink("Редактировать", "Edit", new { orid = item.ID }) |
+                        @Html.ActionLink("Просмотреть", "Details", new { orid = item.ID }) |
+                        @if (item.Activity)
+                        {
+                            @Html.ActionLink("Удалить", "Delete", new { orid = item.ID })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Востановить", "Delete", new { orid = item.ID })
+                        }
+                    </td>
+                </tr>
+                <tr class="visible-xs">
+                    <td colspan="59" class="navbar-collapse collapse" id="@string.Concat(item.ID,item.MasterFID)">
+                        <div class="panel-body btn-group-sm">
+                                @Html.ActionLink("Редактировать", "Edit", new { orid = item.ID }, new { @class = "btn btn-primary" }) 
+                                @Html.ActionLink("Просмотреть", "Details", new { orid = item.ID }, new { @class = "btn btn-primary" }) 
+                                @if (item.Activity)
+                                {
+                                    @Html.ActionLink("Удалить", "Delete", new { orid = item.ID } , new { @class = "btn btn-primary" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Востановить", "Delete", new { orid = item.ID }, new { @class = "btn btn-primary" })
+                                }  
+                        </div>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>

@@ -1,0 +1,119 @@
+﻿@model WebPerfectStore.ViewModels.OrderViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.DocType.DocTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.DocType.DocTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.MasterAgent.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.MasterAgent.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Outlet.fName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.Outlet.fName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Sum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.Sum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Condition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.Condition)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Order.MasterDocID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Order.MasterDocID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Order.MasterDocMasterfID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Order.MasterDocMasterfID)
+            </dd>*@
+
+    </dl>
+    <table class="table">
+        <tr>
+            <td>Вопрос</td>
+
+            @foreach (var item in Model.Questions.SelectMany(x => x.Answers).GroupBy(x => x.Attribute).Select(k => k.Key).OrderBy(o => o.AttrID))
+            {
+
+                <td> @Html.DisplayFor(m => item.AttrName) </td>
+            }
+        </tr>
+        @foreach (var item in Model.Questions)
+        {
+            <tr>
+                <td> @Html.DisplayFor(i => item.Item.ShortName)</td>
+                @foreach (var answer in item.Answers.OrderBy(o => o.Attribute.AttrID))
+                {
+                    <td>@Html.DisplayFor(e => answer.Value)</td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = model.Order.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
